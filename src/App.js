@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import BeerList from './components/beerList';
+import NavBar from './components/navBar';
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("")
@@ -22,26 +24,11 @@ const App = () => {
 
   return(
     <div>
-      React App Beers
-      <form>
-        <input type="text" id="inputValue" value={searchTerm} onInput={handleInput} />
-      </form> 
-      {
-        beers
-        .filter(item => {
-          if (!searchTerm) return true
-          if (item.name.includes(searchTerm)) {
-            return true
-          }
-        })
-        .map(item => (
-          <div key={item.id}>
-            <h3>{item.name}</h3>
-            <span>{item.tagline}</span>
-            <img src={item.image_url} />
-          </div>
-        ))
-      }
+      <h1>React App Beers</h1>
+      <NavBar searchTerm={searchTerm} handleInput={handleInput} /> 
+
+      <BeerList beers={beers} searchTerm={searchTerm} />
+
     </div>
   )
 }
